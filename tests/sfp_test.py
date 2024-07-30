@@ -60,6 +60,9 @@ Ethernet0: SFP EEPROM detected
                 VccHighWarning : 3.4650Volts
                 VccLowAlarm    : 2.9700Volts
                 VccLowWarning  : 3.1349Volts
+        VDMMonitorValues:
+                EsnrMediaInput1: 22.324dB
+                PrefecBerMinMediaInput1: 6.03E-05
 """
 
 test_qsfp_dd_eeprom_with_dom_output = """\
@@ -131,6 +134,7 @@ Ethernet8: SFP EEPROM detected
                 VccHighWarning : 3.4672Volts
                 VccLowAlarm    : 2.9696Volts
                 VccLowWarning  : 3.1304Volts
+        VDMMonitorValues:
 """
 
 test_osfp_eeprom_with_dom_output = """\
@@ -200,6 +204,7 @@ Ethernet72: SFP EEPROM detected
                 Temperature: 40.5C
                 Vcc: 3.331Volts
         ModuleThresholdValues:
+        VDMMonitorValues:
 """
 
 test_sfp_eeprom_output = """\
@@ -678,6 +683,9 @@ Ethernet0: SFP EEPROM detected
                 VccHighWarning : 3.4650Volts
                 VccLowAlarm    : 2.9700Volts
                 VccLowWarning  : 3.1349Volts
+        VDMMonitorValues:
+                EsnrMediaInput1: 22.324dB
+                PrefecBerMinMediaInput1: 6.03E-05
 
 Ethernet4: SFP EEPROM Not detected
 
@@ -754,6 +762,7 @@ Ethernet64: SFP EEPROM detected
                 VccHighWarning : 3.4650Volts
                 VccLowAlarm    : 2.9700Volts
                 VccLowWarning  : 3.1349Volts
+        VDMMonitorValues:
 """
 
 test_sfp_eeprom_all_output = """\

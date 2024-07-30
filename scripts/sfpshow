@@ -135,6 +135,35 @@ DOM_MODULE_MONITOR_MAP = {
     'voltage': 'Vcc'
 }
 
+vdm_base_keys = [
+    'prefec_ber_min_media_input',
+    'prefec_ber_max_media_input'
+    'prefec_ber_avg_media_input',
+    'prefec_ber_curr_media_input',
+    'errored_frames_min_media_input',
+    'errored_frames_max_media_input',
+    'errored_frames_avg_media_input',
+    'errored_frames_curr_media_input',
+    'prefec_ber_min_host_input',
+    'prefec_ber_max_host_input',
+    'prefec_ber_avg_host_input',
+    'prefec_ber_curr_host_input',
+    'errored_frames_min_host_input',
+    'errored_frames_max_host_input',
+    'errored_frames_avg_host_input',
+    'errored_frames_curr_host_input',
+    'esnr_media_input',
+    'esnr_host_input',
+    'pam4_level_transition_media_input',
+    'pam4_level_transition_host_input',
+]
+suffixes = range(1, 9)
+QSFP_VDM_MONITOR_MAP = {
+    f"{base_key}{suffix}": f"{base_key.title().replace('_', '')}{suffix}"
+    for base_key in vdm_base_keys
+    for suffix in suffixes
+}
+
 DOM_CHANNEL_THRESHOLD_UNIT_MAP = {
     'txpowerhighalarm':   'dBm',
     'txpowerlowalarm':    'dBm',
@@ -401,6 +430,18 @@ class SFPShow(object):
                 DOM_MODULE_THRESHOLD_UNIT_MAP,
                 module_threshold_align)
             output_dom += output_module_threshold
+
+            # VDM Monitor
+            output_dom += (indent + 'VDMMonitorValues:\n')
+            sorted_key_table = natsorted(QSFP_VDM_MONITOR_MAP)
+            pattern_for_vdm_with_dB_unit = re.compile(r'(esnr_media_input|esnr_host_input|pam4_level_transition_media_input|pam4_level_transition_host_input)[1-8]')
+            for key in sorted_key_table:
+                if key not in dom_info_dict:
+                    continue
+                if pattern_for_vdm_with_dB_unit.match(key):
+                    output_dom += '{}{}: {:.3f}dB\n'.format((indent * 2), QSFP_VDM_MONITOR_MAP[key], float(dom_info_dict[key]))
+                else:
+                    output_dom += '{}{}: {:.2E}\n'.format((indent * 2), QSFP_VDM_MONITOR_MAP[key], float(dom_info_dict[key]))
 
         else:
             output_dom += (indent + 'MonitorData:\n')

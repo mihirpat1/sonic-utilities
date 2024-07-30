@@ -31,7 +31,9 @@
         "tx1power": "N/A",
         "tx2power": "N/A",
         "tx3power": "N/A",
-        "tx4power": "N/A"
+        "tx4power": "N/A",
+        "prefec_ber_min_media_input1": "6.0299999999999995e-05",
+        "esnr_media_input1": "22.32421875"
     },
     "TRANSCEIVER_DOM_THRESHOLD|Ethernet0": {
         "rxpowerhighalarm": "3.4001",
